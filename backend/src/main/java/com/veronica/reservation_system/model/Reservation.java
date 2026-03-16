@@ -26,11 +26,18 @@ public class Reservation {
         this.service = service;
     }
 
+    // --- Getters ---
     public Long getId() { return id; }
     public String getClientName() { return clientName; }
     public LocalDateTime getDate() { return date; }
     public Service getService() { return service; }
 
+    // 🔹 Nuevo getter para mostrar serviceType
+    public String getServiceType() {
+        return service != null ? service.getName() : null;
+    }
+
+    // --- Setters ---
     public void setClientName(String clientName) { this.clientName = clientName; }
     public void setDate(LocalDateTime date) { this.date = date; }
     public void setService(Service service) { this.service = service; }
