@@ -1,6 +1,7 @@
 package com.veronica.reservation_system.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Reservation {
@@ -10,16 +11,27 @@ public class Reservation {
     private Long id;
 
     private String clientName;
-    private String serviceType;
 
-    // Constructor vacío
+    private LocalDateTime date;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Service service;
+
     public Reservation() {}
 
-    // Getters y setters
+    public Reservation(String clientName, LocalDateTime date, Service service) {
+        this.clientName = clientName;
+        this.date = date;
+        this.service = service;
+    }
+
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
     public String getClientName() { return clientName; }
+    public LocalDateTime getDate() { return date; }
+    public Service getService() { return service; }
+
     public void setClientName(String clientName) { this.clientName = clientName; }
-    public String getServiceType() { return serviceType; }
-    public void setServiceType(String serviceType) { this.serviceType = serviceType; }
+    public void setDate(LocalDateTime date) { this.date = date; }
+    public void setService(Service service) { this.service = service; }
 }
