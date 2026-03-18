@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getServices, createReservation } from "./core/api/api";
+import { getServices, createReservation } from "./core/api/api.js";
 
 function App() {
 
