@@ -1,30 +1,87 @@
 import { useEffect, useState } from "react";
+import { getServices, createReservation } from "./core/api";
 
 function App() {
 
   const [services, setServices] = useState([]);
+  const [clientName, setClientName] = useState("");
+  const [date, setDate] = useState("");
+  const [serviceId, setServiceId] = useState("");
 
+  // Cargar servicios desde backend usando core/api
   useEffect(() => {
-    fetch("http://localhost:8080/services")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data); // para comprobar
-        setServices(data);
-      })
+    getServices()
+      .then(data => setServices(data))
       .catch(err => console.error(err));
   }, []);
 
+  // Crear reserva usando core/api
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const reservation = {
+      clientName,
+      date,
+      service: { id: serviceId }
+    };
+
+    createReservation(reservation)
+      .then(() => {
+        alert("Reserva creada correctamente");
+        // Limpiar formulario
+        setClientName("");
+        setDate("");
+        setServiceId("");
+      })
+      .catch(err => console.error(err));
+  };
+
   return (
     <div>
-      <h1>Servicios</h1>
+      <h1>Sistema de reservas</h1>
 
+      <h2>Servicios</h2>
       <ul>
-        {services.map(service => (
-          <li key={service.id}>
-            {service.name} - {service.price}€
+        {services.map(s => (
+          <li key={s.id}>
+            {s.name} - {s.price}€
           </li>
         ))}
       </ul>
+
+      <h2>Nueva reserva</h2>
+      <form onSubmit={handleSubmit}>
+
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={clientName}
+          onChange={(e) => setClientName(e.target.value)}
+          required
+        />
+
+        <input
+          type="datetime-local"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+        />
+
+        <select
+          value={serviceId}
+          onChange={(e) => setServiceId(e.target.value)}
+          required
+        >
+          <option value="">Selecciona servicio</option>
+          {services.map(s => (
+            <option key={s.id} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+        </select>
+
+        <button type="submit">Reservar</button>
+      </form>
 
     </div>
   );
