@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createReservation } from "./core/api/api.js";
+import { useReservations } from "./core/hooks/useReservations";
 import { useServices } from "./core/hooks/useServices";
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
   const [clientName, setClientName] = useState("");
   const [date, setDate] = useState("");
   const [serviceId, setServiceId] = useState("");
+  const { addReservation } = useReservations();
 
     // Crear reserva usando core/api
   const handleSubmit = (e) => {
@@ -19,7 +20,7 @@ function App() {
       service: { id: serviceId }
     };
 
-    createReservation(reservation)
+    addReservation(reservation)
       .then(() => {
         alert("Reserva creada correctamente");
         // Limpiar formulario
