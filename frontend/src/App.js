@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
-import { getServices, createReservation } from "./core/api/api.js";
+import { useState } from "react";
+import { createReservation } from "./core/api/api.js";
+import { useServices } from "./core/hooks/useServices";
 
 function App() {
 
-  const [services, setServices] = useState([]);
+  const services = useServices();
   const [clientName, setClientName] = useState("");
   const [date, setDate] = useState("");
   const [serviceId, setServiceId] = useState("");
 
-  // Cargar servicios desde backend usando core/api
-  useEffect(() => {
-    getServices()
-      .then(data => setServices(data))
-      .catch(err => console.error(err));
-  }, []);
-
-  // Crear reserva usando core/api
+    // Crear reserva usando core/api
   const handleSubmit = (e) => {
     e.preventDefault();
 
