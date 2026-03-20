@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useReservations } from "./core/hooks/useReservations";
 import { useServices } from "./core/hooks/useServices";
+import ServiceList from "./ui/components/ServiceList";
 
 function App() {
 
@@ -36,14 +37,8 @@ function App() {
       <h1>Sistema de reservas</h1>
 
       <h2>Servicios</h2>
-      <ul>
-        {services.map(s => (
-          <li key={s.id}>
-            {s.name} - {s.price}€
-          </li>
-        ))}
-      </ul>
-
+      <ServiceList services={services} />
+      
       <h2>Nueva reserva</h2>
       <form onSubmit={handleSubmit}>
 
