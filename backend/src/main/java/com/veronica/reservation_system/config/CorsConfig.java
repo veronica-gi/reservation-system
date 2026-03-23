@@ -13,8 +13,10 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // Permite todas las rutas (/**) para el frontend en localhost:3000
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }
