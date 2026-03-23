@@ -3,6 +3,7 @@ import { useReservations } from "./core/hooks/useReservations";
 import ServiceList from "./ui/components/ServiceList";
 import ReservationForm from "./ui/components/ReservationForm";
 import ReservationList from "./ui/components/ReservationList";
+import "./App.css";
 
 function App() {
 
@@ -13,18 +14,23 @@ function App() {
     <div>
       <h1>Sistema de reservas</h1>
 
-      <h2>Servicios</h2>
-      <ServiceList services={services} />
+      <div className="section">
+        <h2>Servicios</h2>
+        <ServiceList services={services} />
+      </div>
 
-      <h2>Nueva reserva</h2>
-      <ReservationForm services={services} onAdd={addReservation} />
+      <div className="section">
+        <h2>Nueva reserva</h2>
+        <ReservationForm services={services} onAdd={addReservation} />
+      </div>
 
-      <h2>Reservas existentes</h2>
-      <ReservationList 
-        reservations={reservations} 
-        onDelete={removeReservation} 
-      />
-
+      <div className="section">
+        <h2>Reservas existentes</h2>
+        <ReservationList 
+          reservations={reservations} 
+          onDelete={removeReservation} 
+        />
+      </div>
 
     </div>
   );
