@@ -29,3 +29,13 @@ export const deleteReservation = (id) => {
     method: "DELETE"
   });
 };
+
+export const updateReservation = (id, reservation) => {
+  return fetch(`${BASE_URL}/reservations/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(reservation)
+  }).then(res => res.json());
+};
