@@ -9,7 +9,11 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
   useEffect(() => {
     if (editingReservation) {
       setClientName(editingReservation.clientName || "");
-      setDate(editingReservation.date || "");
+      setDate(
+  editingReservation.date 
+    ? editingReservation.date.slice(0, 16) 
+    : ""
+);
       setServiceId(editingReservation.service?.id || "");
     }
   }, [editingReservation]);
