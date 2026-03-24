@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ReservationForm({ services, onAdd }) {
+function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
+
   const [clientName, setClientName] = useState("");
   const [date, setDate] = useState("");
   const [serviceId, setServiceId] = useState("");
 
+  useEffect(() => {
+    if (editingReservation) {
+      setClientName(editingReservation.clientName);
+      setDate(editingReservation.date);
+      setServiceId(editingReservation.service?.id || "");
+    }
+  }, [editingReservation]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!clientName || !date || !serviceId) return;
-
-    onAdd({
+    const reservation = {
       clientName,
       date,
       service: { id: serviceId }
-    });
+    };
+
+    if (editingReservation) {
+      onUpdate(editingReservation.id, reservation);
+    } else {
+      onAdd(reservation);
+    }
 
     setClientName("");
     setDate("");
@@ -23,26 +36,22 @@ function ReservationForm({ services, onAdd }) {
 
   return (
     <form onSubmit={handleSubmit}>
-
       <input
         type="text"
         placeholder="Nombre"
         value={clientName}
         onChange={(e) => setClientName(e.target.value)}
-        required
       />
 
       <input
         type="datetime-local"
         value={date}
         onChange={(e) => setDate(e.target.value)}
-        required
       />
 
       <select
         value={serviceId}
         onChange={(e) => setServiceId(e.target.value)}
-        required
       >
         <option value="">Selecciona servicio</option>
         {services.map(s => (
@@ -52,8 +61,9 @@ function ReservationForm({ services, onAdd }) {
         ))}
       </select>
 
-      <button type="submit">Reservar</button>
-
+      <button type="submit">
+        {editingReservation ? "Actualizar" : "Reservar"}
+      </button>
     </form>
   );
 }

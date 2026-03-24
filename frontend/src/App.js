@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useServices } from "./core/hooks/useServices";
 import { useReservations } from "./core/hooks/useReservations";
 import ServiceList from "./ui/components/ServiceList";
@@ -8,7 +9,18 @@ import "./App.css";
 function App() {
 
   const services = useServices();
-  const { reservations, addReservation, removeReservation } = useReservations();
+  const { 
+    reservations, 
+    addReservation, 
+    removeReservation, 
+    updateReservation 
+  } = useReservations();
+
+  const [editingReservation, setEditingReservation] = useState(null);
+
+  const handleEdit = (reservation) => {
+    setEditingReservation(reservation);
+  };
 
   return (
     <div>
@@ -21,14 +33,20 @@ function App() {
 
       <div className="section">
         <h2>Nueva reserva</h2>
-        <ReservationForm services={services} onAdd={addReservation} />
+        <ReservationForm 
+          services={services} 
+          onAdd={addReservation}
+          onUpdate={updateReservation}
+          editingReservation={editingReservation}
+        />
       </div>
 
       <div className="section">
         <h2>Reservas existentes</h2>
         <ReservationList 
           reservations={reservations} 
-          onDelete={removeReservation} 
+          onDelete={removeReservation}
+          onEdit={handleEdit}
         />
       </div>
 
