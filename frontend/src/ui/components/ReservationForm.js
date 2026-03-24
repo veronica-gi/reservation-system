@@ -24,7 +24,7 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
     const reservation = {
       clientName,
       date,
-      service: { id: serviceId }
+      service: { id: Number (serviceId) }
     };
 
     if (editingReservation) {

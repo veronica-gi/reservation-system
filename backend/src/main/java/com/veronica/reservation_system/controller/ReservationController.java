@@ -51,13 +51,13 @@ public class ReservationController {
     public void deleteReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);
     }
-}
+
 
     //Editar Reserva
     @PutMapping("/{id}")
     public Reservation updateReservation(@PathVariable Long id, @RequestBody Reservation updated) {
 
-        Reservation existing = reservationService.getById(id);
+        Reservation existing = reservationService.getReservationById(id).orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
 
         existing.setClientName(updated.getClientName());
         existing.setDate(updated.getDate());
@@ -66,5 +66,5 @@ public class ReservationController {
         return reservationService.saveReservation(existing);
     }
 
-
+}
 
