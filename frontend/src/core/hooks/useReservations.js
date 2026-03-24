@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getReservations, createReservation, deleteReservation } from "../api/api";
+import { getReservations, createReservation, deleteReservation, updateReservation as updateReservationApi } from "../api/api";
 
 export const useReservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -24,5 +24,10 @@ export const useReservations = () => {
       .then(() => fetchReservations());
   };
 
-  return { reservations, addReservation, removeReservation };
+   const updateReservation = (id, reservation) => {
+    return updateReservationApi(id, reservation)
+      .then(() => fetchReservations());
+  };
+
+  return { reservations, addReservation, removeReservation, updateReservation };
 };
