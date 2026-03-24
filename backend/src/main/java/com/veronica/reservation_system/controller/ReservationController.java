@@ -52,3 +52,19 @@ public class ReservationController {
         reservationService.deleteReservation(id);
     }
 }
+
+    //Editar Reserva
+    @PutMapping("/{id}")
+    public Reservation updateReservation(@PathVariable Long id, @RequestBody Reservation updated) {
+
+        Reservation existing = reservationService.getById(id);
+
+        existing.setClientName(updated.getClientName());
+        existing.setDate(updated.getDate());
+        existing.setService(updated.getService());
+
+        return reservationService.saveReservation(existing);
+    }
+
+
+
