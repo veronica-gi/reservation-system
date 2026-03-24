@@ -8,8 +8,8 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
 
   useEffect(() => {
     if (editingReservation) {
-      setClientName(editingReservation.clientName);
-      setDate(editingReservation.date);
+      setClientName(editingReservation.clientName || "");
+      setDate(editingReservation.date || "");
       setServiceId(editingReservation.service?.id || "");
     }
   }, [editingReservation]);
@@ -39,18 +39,18 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
       <input
         type="text"
         placeholder="Nombre"
-        value={clientName}
+        value={clientName || ""}
         onChange={(e) => setClientName(e.target.value)}
       />
 
       <input
         type="datetime-local"
-        value={date}
+        value={date || ""}
         onChange={(e) => setDate(e.target.value)}
       />
 
       <select
-        value={serviceId}
+        value={serviceId || ""}
         onChange={(e) => setServiceId(e.target.value)}
       >
         <option value="">Selecciona servicio</option>
