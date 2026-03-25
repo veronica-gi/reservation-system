@@ -111,3 +111,12 @@ button:hover {
   border: 2px solid #fbc531;
   background-color: #fffbea;
 }
+
+button.cancel {
+  background-color: #dcdde1;
+  color: #2f3640;
+}
+
+button.cancel:hover {
+  background-color: #b2bec3;
+}

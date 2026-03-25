@@ -82,7 +82,7 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
 
       {/* BOTÓN CANCELAR */}
       {editingReservation && (
-        <button type="button" onClick={onCancel}>
+        <button type="button" onClick={onCancel} className="cancel">
           Cancelar
         </button>
       )}
