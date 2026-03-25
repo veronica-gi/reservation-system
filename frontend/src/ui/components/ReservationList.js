@@ -10,16 +10,15 @@ function ReservationList({ reservations, onDelete, onEdit }) {
     <ul>
       {reservations.map(r => (
         <li key={r.id}>
-          {r.clientName} - {r.service?.name} - {new Date(r.date).toLocaleString()}
-          
-          <button onClick={() => onEdit(r)}>
-            Editar
-          </button>
+  <span className="reservation-info">
+    {r.clientName} - {r.service?.name} - {new Date(r.date).toLocaleString()}
+  </span>
 
-          <button onClick={() => handleDelete(r.id)}>
-            Eliminar
-          </button>
-        </li>
+  <div className="actions">
+    <button onClick={() => onEdit(r)}>Editar</button>
+    <button onClick={() => handleDelete(r.id)}>Eliminar</button>
+  </div>
+</li>
       ))}
     </ul>
   );

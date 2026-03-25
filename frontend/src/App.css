@@ -51,6 +51,7 @@ input, select {
 }
 
 /* Botones */
+
 button {
   padding: 10px;
   border: none;
@@ -62,6 +63,15 @@ button {
 
 button:hover {
   background-color: #40739e;
+}
+
+.reservation-info {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
 }
 
 .service-item {
