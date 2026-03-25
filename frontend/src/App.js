@@ -32,13 +32,17 @@ function App() {
       </div>
 
       <div className="section">
-        <h2>Nueva reserva</h2>
-        <ReservationForm 
-          services={services} 
-          onAdd={addReservation}
-          onUpdate={updateReservation}
-          editingReservation={editingReservation}
-        />
+        <h2>
+  {editingReservation ? "Editar reserva" : "Nueva reserva"}
+</h2>
+
+<ReservationForm
+  services={services}
+  onAdd={addReservation}
+  onUpdate={updateReservation}
+  editingReservation={editingReservation}
+  onCancel={() => setEditingReservation(null)}
+/>
       </div>
 
       <div className="section">

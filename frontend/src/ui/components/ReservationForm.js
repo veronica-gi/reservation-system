@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
+function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCancel }) {
 
   const [clientName, setClientName] = useState("");
   const [date, setDate] = useState("");
@@ -38,8 +38,19 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
     setServiceId("");
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
+ return (
+  <>
+    
+    {editingReservation && (
+      <p className="editing-banner">
+        Editando reserva de {editingReservation.clientName}
+      </p>
+    )}
+    
+    <form 
+      onSubmit={handleSubmit}
+      className={editingReservation ? "editing" : ""}
+    >
       <input
         type="text"
         placeholder="Nombre"
@@ -68,8 +79,16 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate }) {
       <button type="submit">
         {editingReservation ? "Actualizar" : "Reservar"}
       </button>
+
+      {/* BOTÓN CANCELAR */}
+      {editingReservation && (
+        <button type="button" onClick={onCancel}>
+          Cancelar
+        </button>
+      )}
     </form>
-  );
+  </>
+);
 }
 
 export default ReservationForm;

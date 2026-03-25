@@ -98,3 +98,16 @@ button:hover {
   border-radius: 20px;
   font-size: 14px;
 }
+
+
+.editing-banner {
+  background-color: #ffeaa7;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.editing {
+  border: 2px solid #fbc531;
+  background-color: #fffbea;
+}
