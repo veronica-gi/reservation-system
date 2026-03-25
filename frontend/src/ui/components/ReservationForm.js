@@ -38,6 +38,12 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
     setServiceId("");
   };
 
+  const resetForm = () => {
+  setClientName("");
+  setDate("");
+  setServiceId("");
+};
+
  return (
   <>
     
@@ -82,7 +88,7 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
 
       {/* BOTÓN CANCELAR */}
       {editingReservation && (
-        <button type="button" onClick={onCancel} className="cancel">
+        <button type="button" onClick={() => {resetForm(); onCancel();}} className="cancel">
           Cancelar
         </button>
       )}
