@@ -7,6 +7,31 @@ export const getServices = () => {
     .then(res => res.json());
 };
 
+// Crear un nuevo servicio
+export const createService = (service) => {
+  return fetch(`${BASE_URL}/services`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(service),
+  }).then(res => res.json());
+};
+
+// Actualizar un servicio existente
+export const updateService = (id, service) => {
+  return fetch(`${BASE_URL}/services/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(service),
+  }).then(res => res.json());
+};
+
+// Eliminar un servicio
+export const deleteService = (id) => {
+  return fetch(`${BASE_URL}/services/${id}`, {
+    method: "DELETE",
+  });
+};
+
 // ==================== Reservas ====================
 
 export const getReservations = () => {
