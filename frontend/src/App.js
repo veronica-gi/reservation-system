@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
 
-  const services = useServices();
+  const { services, loading, error } = useServices();
   const { 
     reservations, 
     addReservation, 
