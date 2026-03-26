@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useServices } from "./core/hooks/useServices";
 import { useReservations } from "./core/hooks/useReservations";
 import ServiceList from "./ui/components/ServiceList";
+import ServiceForm from "./ui/components/ServiceForm";
 import ReservationForm from "./ui/components/ReservationForm";
 import ReservationList from "./ui/components/ReservationList";
 import "./App.css";
 
-function App() {
+const BASE_URL = "http://localhost:8080";
 
-  const { services, loading, error } = useServices();
+function App() {
+  const { services, loading, error, refreshServices } = useServices();
   const { 
     reservations, 
     addReservation, 
@@ -17,9 +19,25 @@ function App() {
   } = useReservations();
 
   const [editingReservation, setEditingReservation] = useState(null);
+  const [editingService, setEditingService] = useState(null);
 
-  const handleEdit = (reservation) => {
+  // Para editar reserva
+  const handleEditReservation = (reservation) => {
     setEditingReservation(reservation);
+  };
+
+  // Para editar servicio
+  const handleEditService = (service) => {
+    setEditingService(service);
+  };
+
+  // Función para eliminar un servicio
+  const deleteService = (id) => {
+    if (window.confirm("¿Seguro que quieres eliminar este servicio?")) {
+      fetch(`${BASE_URL}/services/${id}`, { method: "DELETE" })
+        .then(() => refreshServices())
+        .catch(err => console.error(err));
+    }
   };
 
   return (
@@ -28,21 +46,33 @@ function App() {
 
       <div className="section">
         <h2>Servicios</h2>
-        <ServiceList services={services} />
+
+        {loading && <p>Cargando servicios...</p>}
+        {error && <p style={{color: "red"}}>{error}</p>}
+
+        <ServiceList 
+          services={services} 
+          onEdit={handleEditService} 
+          onDelete={deleteService} 
+        />
+
+        <ServiceForm 
+          service={editingService} 
+          onSave={refreshServices} 
+          onCancel={() => setEditingService(null)}
+        />
       </div>
 
       <div className="section">
-        <h2>
-  {editingReservation ? "Editar reserva" : "Nueva reserva"}
-</h2>
+        <h2>{editingReservation ? "Editar reserva" : "Nueva reserva"}</h2>
 
-<ReservationForm
-  services={services}
-  onAdd={addReservation}
-  onUpdate={updateReservation}
-  editingReservation={editingReservation}
-  onCancel={() => setEditingReservation(null)}
-/>
+        <ReservationForm
+          services={services}
+          onAdd={addReservation}
+          onUpdate={updateReservation}
+          editingReservation={editingReservation}
+          onCancel={() => setEditingReservation(null)}
+        />
       </div>
 
       <div className="section">
@@ -50,10 +80,9 @@ function App() {
         <ReservationList 
           reservations={reservations} 
           onDelete={removeReservation}
-          onEdit={handleEdit}
+          onEdit={handleEditReservation}
         />
       </div>
-
     </div>
   );
 }
