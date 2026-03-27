@@ -40,6 +40,31 @@ function App() {
     }
   };
 
+  // Crear servicio
+const createService = (data) => {
+  fetch(`${BASE_URL}/services`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then(() => refreshServices())
+    .catch(err => console.error(err));
+};
+
+// Actualizar servicio
+const updateService = (id, data) => {
+  fetch(`${BASE_URL}/services/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then(() => {
+      refreshServices();
+      setEditingService(null);
+    })
+    .catch(err => console.error(err));
+};
+
   return (
     <div>
       <h1>Sistema de reservas</h1>
@@ -57,8 +82,9 @@ function App() {
         />
 
         <ServiceForm 
-          service={editingService} 
-          onSave={refreshServices} 
+          onAdd={createService} 
+          onUpdate={updateService}
+          editingService={editingService} 
           onCancel={() => setEditingService(null)}
         />
       </div>
