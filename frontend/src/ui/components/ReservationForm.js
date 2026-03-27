@@ -55,7 +55,7 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
     
     <form 
       onSubmit={handleSubmit}
-      className={editingReservation ? "editing" : ""}
+      className={`reservation-form ${editingReservation ? "editing" : ""}`}
     >
       <input
         type="text"

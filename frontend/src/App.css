@@ -1,3 +1,4 @@
+/* ===== Body y contenedor principal ===== */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f6fa;
@@ -11,47 +12,78 @@ div {
   padding: 20px;
 }
 
+/* ===== Títulos ===== */
 h1 {
   text-align: center;
   color: #2f3640;
 }
 
-h2 {
-  margin-top: 30px;
+.section-title {
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
   color: #353b48;
+  margin-bottom: 0.5rem;
 }
 
-/* Lista */
+/* ===== Listas y items ===== */
 ul {
   list-style: none;
   padding: 0;
 }
 
-li {
-  background: white;
+li, .service-item {
+  background: #fdfdfd;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 12px 15px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Formulario */
-form {
+.service-name {
+  font-weight: 500;
+  color: #2f3640;
+}
+
+.service-price {
+  background-color: #0097e6;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* ===== Formularios ===== */
+.service-form,
+.reservation-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: white;
+  transition: all 0.3s ease;
 }
 
-input, select {
+.service-form.editing,
+.reservation-form.editing {
+  border: 2px solid #007BFF;
+  background-color: #f0f8ff;
+}
+
+.service-form input,
+.service-form select,
+.reservation-form input,
+.reservation-form select {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
 
-/* Botones */
-
+/* ===== Botones ===== */
 button {
   padding: 10px;
   border: none;
@@ -65,53 +97,6 @@ button:hover {
   background-color: #40739e;
 }
 
-.reservation-info {
-  flex: 1;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.service-item {
-  background: #fdfdfd;
-  margin-bottom: 10px;
-  padding: 12px 15px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Nombre */
-.service-name {
-  font-weight: 500;
-  color: #2f3640;
-}
-
-/* Precio tipo "badge" */
-.service-price {
-  background-color: #0097e6;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 14px;
-}
-
-
-.editing-banner {
-  background-color: #ffeaa7;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-
-.editing {
-  border: 2px solid #fbc531;
-  background-color: #fffbea;
-}
-
 button.cancel {
   background-color: #dcdde1;
   color: #2f3640;
@@ -119,4 +104,22 @@ button.cancel {
 
 button.cancel:hover {
   background-color: #b2bec3;
+}
+
+/* ===== Banner de edición ===== */
+.editing-banner {
+  background-color: #ffeaa7;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* ===== Reservas ===== */
+.reservation-info {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
 }

@@ -33,7 +33,11 @@ function ServiceForm({ onAdd, onUpdate, editingService, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="service-form">
+    <form onSubmit={handleSubmit} className={`service-form ${editingService ? "editing" : ""}`}>
+      <h3 className="section-title">
+        {editingService ? "Editar Servicio" : "Agregar Servicio"}
+      </h3>
+      
       <input
         type="text"
         placeholder="Nombre del servicio"
