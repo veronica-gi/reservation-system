@@ -21,6 +21,9 @@ function App() {
   const [editingReservation, setEditingReservation] = useState(null);
   const [editingService, setEditingService] = useState(null);
 
+  // Pestañas
+  const [activeTab, setActiveTab] = useState("services"); // "services" o "reservations"
+
   // Para editar reserva
   const handleEditReservation = (reservation) => {
     setEditingReservation(reservation);
@@ -69,8 +72,26 @@ const updateService = (id, data) => {
     <div>
       <h1>Sistema de reservas</h1>
 
-      <div className="section">
-        <h2>Servicios</h2>
+      {/* cabecera de pestañas */}
+      <div className="tabs">
+        <button
+          className={activeTab === "services" ? "active" : ""}
+          onClick={() => setActiveTab("services")}
+        >
+          Servicios
+        </button>
+        <button
+          className={activeTab === "reservations" ? "active" : ""}
+          onClick={() => setActiveTab("reservations")}
+        >
+          Reservas
+        </button>
+      </div>
+
+      {/* Sección de Servicios solo si pestaña activa */}
+      {activeTab === "services" && (
+        <div className="section">
+          <h2 className="section-title">Servicios</h2>
 
         {loading && <p>Cargando servicios...</p>}
         {error && <p style={{color: "red"}}>{error}</p>}
@@ -88,9 +109,14 @@ const updateService = (id, data) => {
           onCancel={() => setEditingService(null)}
         />
       </div>
+      )}
 
-      <div className="section">
-        <h2>{editingReservation ? "Editar reserva" : "Nueva reserva"}</h2>
+       {/* Sección de Reservas solo si pestaña activa */}
+      {activeTab === "reservations" && (
+        <div className="section">
+          <h2 className="section-title">
+            {editingReservation ? "Editar reserva" : "Nueva reserva"}
+          </h2>
 
         <ReservationForm
           services={services}
@@ -98,17 +124,15 @@ const updateService = (id, data) => {
           onUpdate={updateReservation}
           editingReservation={editingReservation}
           onCancel={() => setEditingReservation(null)}
-        />
-      </div>
+          />
 
-      <div className="section">
-        <h2>Reservas existentes</h2>
-        <ReservationList 
-          reservations={reservations} 
-          onDelete={removeReservation}
-          onEdit={handleEditReservation}
-        />
-      </div>
+          <ReservationList
+            reservations={reservations}
+            onDelete={removeReservation}
+            onEdit={handleEditReservation}
+          />
+        </div>
+      )}
     </div>
   );
 }

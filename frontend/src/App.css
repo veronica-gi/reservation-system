@@ -123,3 +123,35 @@ button.cancel:hover {
   display: flex;
   gap: 10px;
 }
+
+/* ===== Barra de pestañas ===== */
+.tabs {
+  display: flex;
+  gap: 10 px; 
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background-color: #f5f6fa;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  color: #2f3640;
+}
+
+.tabs button:hover {
+  background-color: #e1e4e8;
+}
+
+.tabs button.active {
+  background-color: #0097e6;
+  color: white;
+  box-shadow: inset 0 -2px 0 #007bb5;
+}
