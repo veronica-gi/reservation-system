@@ -10,7 +10,7 @@ function ServiceList({ services, onEdit, onDelete }) {
       {services.map((s) => (
         <li key={s.id} className="service-item">
   <div className="service-name">{s.name}</div>
-  <div className="service-price">${s.price}</div>
+  <div className="service-price">€{s.price}</div>
   <div className="service-actions">
     <button onClick={() => onEdit(s)}>Editar</button>
     <button onClick={() => handleDelete(s.id)}>Eliminar</button>
