@@ -96,18 +96,19 @@ const updateService = (id, data) => {
         {loading && <p>Cargando servicios...</p>}
         {error && <p style={{color: "red"}}>{error}</p>}
 
-        <ServiceList 
-          services={services} 
-          onEdit={handleEditService} 
-          onDelete={deleteService} 
-        />
-
         <ServiceForm 
           onAdd={createService} 
           onUpdate={updateService}
           editingService={editingService} 
           onCancel={() => setEditingService(null)}
         />
+
+        <ServiceList 
+          services={services} 
+          onEdit={handleEditService} 
+          onDelete={deleteService} 
+        />
+
       </div>
       )}
 
