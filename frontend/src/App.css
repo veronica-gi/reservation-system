@@ -100,6 +100,22 @@ li, .service-item {
   border: 1px solid #ccc;
 }
 
+.reservation-client {
+  font-weight: 600;
+  color: #2f3640;
+}
+
+.reservation-service {
+  margin: 0 15px;
+  color: #0097e6; 
+  font-weight: 500;
+}
+
+.reservation-date {
+  color: #718093; 
+  font-size: 0.9rem;
+}
+
 /* ===== Botones ===== */
 button {
   padding: 10px;
