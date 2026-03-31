@@ -8,12 +8,14 @@ function ServiceList({ services, onEdit, onDelete }) {
   return (
     <ul>
       {services.map((s) => (
-        <li key={s.id}>
-          <span className="service-name">{s.name}</span>
-          <span className="service-price">${s.price}</span>
-          <button onClick={() => onEdit(s)}>Editar</button>
-          <button onClick={() => handleDelete(s.id)}>Eliminar</button>
-        </li>
+        <li key={s.id} className="service-item">
+  <div className="service-name">{s.name}</div>
+  <div className="service-price">${s.price}</div>
+  <div className="service-actions">
+    <button onClick={() => onEdit(s)}>Editar</button>
+    <button onClick={() => handleDelete(s.id)}>Eliminar</button>
+  </div>
+</li>
       ))}
     </ul>
   );

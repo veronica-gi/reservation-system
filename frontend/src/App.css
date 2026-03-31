@@ -40,19 +40,36 @@ li, .service-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 85px;
 }
 
 .service-name {
   font-weight: 500;
   color: #2f3640;
+  flex: 1; 
+  min-width: 0;
 }
 
 .service-price {
-  background-color: #0097e6;
+  background-color: #2f3640;
   color: white;
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 14px;
+  width: 80px;
+  text-align: center;
+}
+
+.service-info {
+  display: flex;
+  align-items: center; /* alineación vertical consistente */
+  gap: 15px; /* espacio entre nombre y precio */
+}
+
+.service-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* asegura que botones estén alineados con price */
 }
 
 /* ===== Formularios ===== */
