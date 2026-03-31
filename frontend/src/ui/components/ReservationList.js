@@ -1,5 +1,17 @@
 function ReservationList({ reservations, onDelete, onEdit }) {
 
+  const today = new Date();
+
+  // Función para comprobar si la reserva es del día de hoy
+  const isToday = (reservationDate) => {
+    const d = new Date(reservationDate);
+    return (
+      d.getFullYear() === today.getFullYear() &&
+      d.getMonth() === today.getMonth() &&
+      d.getDate() === today.getDate()
+    );
+  };
+
   const handleDelete = (id) => {
     if (window.confirm("¿Seguro que quieres eliminar esta reserva?")) {
       onDelete(id);
@@ -11,7 +23,7 @@ function ReservationList({ reservations, onDelete, onEdit }) {
       {reservations
        .sort((a, b) => new Date(a.date) - new Date(b.date))
         .map(r => (
-        <li key={r.id}>
+        <li key={r.id} className={isToday(r.date) ? "today" : ""}>
 
   <span className="reservation-info">
    <span className="reservation-client">{r.clientName}</span>
