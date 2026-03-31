@@ -8,7 +8,9 @@ function ReservationList({ reservations, onDelete, onEdit }) {
 
   return (
     <ul>
-      {reservations.map(r => (
+      {reservations
+       .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .map(r => (
         <li key={r.id}>
   <span className="reservation-info">
     {r.clientName} - {r.service?.name} - {new Date(r.date).toLocaleString()}
