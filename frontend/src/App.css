@@ -6,16 +6,35 @@ body {
   padding: 0;
 }
 
-div {
+.container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+}
+
+.header {
+  background-color: #bfc5df;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
 }
 
 /* ===== Títulos ===== */
 h1 {
   text-align: center;
   color: #2f3640;
+  position: relative;
+  
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #0097e6;
+  margin: 8px auto 0;
+  border-radius: 2px;
 }
 
 .section-title {

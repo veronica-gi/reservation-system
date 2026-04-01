@@ -70,8 +70,11 @@ const updateService = (id, data) => {
 
   return (
     <div>
+      <div className="header">
       <h1>Sistema de reservas</h1>
+      </div>
 
+      <div className="container">
       {/* cabecera de pestañas */}
       <div className="tabs">
         <button
@@ -134,6 +137,7 @@ const updateService = (id, data) => {
           />
         </div>
       )}
+    </div>
     </div>
   );
 }
