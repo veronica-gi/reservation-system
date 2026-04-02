@@ -14,6 +14,18 @@ function ServiceForm({ onAdd, onUpdate, editingService, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+      // ===== VALIDACIONES =====
+    if (!name.trim()) {
+      alert("El nombre del servicio es obligatorio");
+      return;
+    }
+
+    if (!price || Number(price) <= 0) {
+      alert("El precio debe ser mayor que 0");
+      return;
+    }
+
     const serviceData = { name, price: Number(price) };
 
     if (editingService) {
