@@ -10,7 +10,7 @@ import "./App.css";
 const BASE_URL = "http://localhost:8080";
 
 function App() {
-  const { services, loading, error, refreshServices } = useServices();
+  const { services, loading, error, refreshServices, deleteService } = useServices();
   const { 
     reservations, 
     addReservation, 
@@ -25,24 +25,14 @@ function App() {
   const [activeTab, setActiveTab] = useState("services"); // "services" o "reservations"
 
   // Para editar reserva
-  const handleEditReservation = (reservation) => {
+  const handleEditReservation = (reservation) => 
     setEditingReservation(reservation);
-  };
-
+  
   // Para editar servicio
-  const handleEditService = (service) => {
+  const handleEditService = (service) => 
     setEditingService(service);
-  };
-
-  // Función para eliminar un servicio
-  const deleteService = (id) => {
-    if (window.confirm("¿Seguro que quieres eliminar este servicio?")) {
-      fetch(`${BASE_URL}/services/${id}`, { method: "DELETE" })
-        .then(() => refreshServices())
-        .catch(err => console.error(err));
-    }
-  };
-
+        
+  
   // Crear servicio
 const createService = (data) => {
   fetch(`${BASE_URL}/services`, {
