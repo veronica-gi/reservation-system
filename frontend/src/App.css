@@ -220,3 +220,11 @@ li.today {
 li.today:hover {
   background-color: #e6ffe6; 
 }
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 5px;
+  display: block;
+}

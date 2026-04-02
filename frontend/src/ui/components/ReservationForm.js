@@ -6,6 +6,9 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
   const [date, setDate] = useState("");
   const [serviceId, setServiceId] = useState("");
 
+   // Estado para errores
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     if (editingReservation) {
       setClientName(editingReservation.clientName || "");
@@ -18,8 +21,19 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
     }
   }, [editingReservation]);
 
+   const validate = () => {
+    const newErrors = {};
+    if (!clientName.trim()) newErrors.clientName = "El nombre del cliente es obligatorio.";
+    if (!date) newErrors.date = "Debes seleccionar fecha y hora.";
+    if (!serviceId) newErrors.serviceId = "Debes seleccionar un servicio.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validate()) return;
 
     const reservation = {
       clientName,
@@ -63,12 +77,14 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
         value={clientName || ""}
         onChange={(e) => setClientName(e.target.value)}
       />
+      {errors.clientName && <span className="error">{errors.clientName}</span>}
 
       <input
         type="datetime-local"
         value={date || ""}
         onChange={(e) => setDate(e.target.value)}
       />
+      {errors.date && <span className="error">{errors.date}</span>}
 
       <select
         value={serviceId || ""}
@@ -81,6 +97,7 @@ function ReservationForm({ services, onAdd, editingReservation, onUpdate, onCanc
           </option>
         ))}
       </select>
+      {errors.serviceId && <span className="error">{errors.serviceId}</span>}
 
       <button type="submit">
         {editingReservation ? "Actualizar" : "Reservar"}
