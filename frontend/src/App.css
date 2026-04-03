@@ -228,3 +228,41 @@ li.today:hover {
   margin-bottom: 5px;
   display: block;
 }
+
+
+@media (max-width: 768px) {
+
+  .container {
+    padding: 10px;
+  }
+
+  li, .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* antes 85px ❌ */
+  }
+
+  .service-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .service-actions,
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .reservation-service {
+    margin: 5px 0;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tabs button {
+    width: 100%;
+  }
+}
